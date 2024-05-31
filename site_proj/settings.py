@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import django_heroku
+
 
 
 from pathlib import Path
@@ -203,10 +203,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 
-# ---- heroku -----#
-django_heroku.settings(locals())
-
-
 
 
 
@@ -225,7 +221,7 @@ django_heroku.settings(locals())
 #---------------------------------
 
 
-POSTGRES_URL="POSTGRES_URL"
+
 
 
 DATABASES = {
