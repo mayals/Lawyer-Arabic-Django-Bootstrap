@@ -17,6 +17,17 @@ from pathlib import Path
 import os
 
 
+from environ import Env
+env = Env()
+Env.read_env()   # take environment variables from .env using env()
+
+
+
+
+# https://pypi.org/project/django-database-url/
+import dj_database_url
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,7 +41,7 @@ SECRET_KEY = 'F8B87Faffb05C6Aaead64Ee31Be710C4Cbda6D086D9A0441'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['lawyer-arabic-django-bootstrap.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -94,6 +105,9 @@ DATABASES = {
         # 'PASSWORD': 'burgerking_2010',
         # 'HOST': 'localhost',
         # 'PORT': '5432',
+
+
+
 
 
         
@@ -211,3 +225,9 @@ django_heroku.settings(locals())
 #---------------------------------
 
 
+POSTGRES_URL="POSTGRES_URL"
+
+
+DATABASES = {
+   'default': dj_database_url.parse(env('DATABASE_URL'), conn_max_age=600, conn_health_checks=True)
+}
