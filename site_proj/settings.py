@@ -30,7 +30,7 @@ SECRET_KEY = 'F8B87Faffb05C6Aaead64Ee31Be710C4Cbda6D086D9A0441'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lawyer-arabic-django-bootstrap.vercel.app']
 
 
 # Application definition
