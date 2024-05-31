@@ -211,16 +211,3 @@ django_heroku.settings(locals())
 #---------------------------------
 
 
-
-### --- from book django for beginners -- page 230 ---####
-#we need sendgrid to send to true email 
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' --- # notchange
-# email account of my sendgrid account
-# DEFAULT_FROM_EMAIL = 'mayalsanea2016@gmail.com'
-# EMAIL_HOST = 'smtp.sendgrid.net'  # not change for any sendgrid
-# EMAIL_HOST_USER = 'apikey'       # not change from sendgrid website page
-## this API key i do in sendgrid website for name:Newspaper
-# EMAIL_HOST_PASSWORD = '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'
-# EMAIL_PORT = 587   # not change from sendgrid website page
-# EMAIL_USE_TLS = True    # not change from sendgrid website page
