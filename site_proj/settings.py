@@ -17,11 +17,9 @@ from pathlib import Path
 import os
 
 
-from environ import Env
-env = Env()
-Env.read_env()   # take environment variables from .env using env()
-
-
+# https://pypi.org/project/python-dotenv/
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env using  os.getenv()
 
 
 # https://pypi.org/project/django-database-url/
@@ -36,18 +34,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'F8B87Faffb05C6Aaead64Ee31Be710C4Cbda6D086D9A0441'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1','localhost']
 
 
 # Application definition
 INSTALLED_APPS = [
-    #--SuitConfig must be before admin--#
-    'blog_app.apps.SuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +56,7 @@ INSTALLED_APPS = [
     'account_app.apps.AccountAppConfig',
     #-- crispy_forms --#
     'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -102,19 +99,13 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': 'lawyer_db',
         # 'USER': 'postgres',
-        # 'PASSWORD': 'burgerking_2010',
+        # 'PASSWORD': '12345',
         # 'HOST': 'localhost',
         # 'PORT': '5432',
 
 
-
-
-
-        
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-
-         
+        'NAME': BASE_DIR / 'db.sqlite3',   
     }
 }
 
@@ -168,62 +159,32 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
 
 
 ############################### Sending emails with Django  ###################################
 ############################   by using GMAIL(( smtp.gmail.com ))###############################################
-#-------------------------- from book django by example2 ----page 121--#--also work ok :)
-#---------------------------------(Muhammed essa) use in in new project 2020 book ------------------------------------
-
-
 # send emails via Gmail servers using a Google account:
 # -----------------------------------------------------
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'your_account@gmail.com'
-# EMAIL_HOST_PASSWORD = 'your_password'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-
-
-
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ---dend to console not to true email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ---send to console not to true email
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-#--------------------
+
+# print("EMAIL_BACKEND",EMAIL_BACKEND)
+# print("EMAIL_HOST",EMAIL_HOST)
+# print("EMAIL_HOST_USER",EMAIL_HOST_USER)
+# print("EMAIL_HOST_PASSWORD",EMAIL_HOST_PASSWORD)
+
+
+
+
+
+
 
 #--  crispy_forms --#
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
-
-
-
-
-
-
-############################### password_reset ###################################
-############################  by useing sendgrid (smtp.sendgrid.net) ###############################################
-#---------------------------- from book django for beginners --------------------also work ok :)
-#---------------------------------------------------------------------
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#DEFAULT_FROM_EMAIL = 'your_custom_email_account'
-#EMAIL_HOST = 'smtp.sendgrid.net'
-#EMAIL_HOST_USER = 'apikey'
-#EMAIL_HOST_PASSWORD = 'sendgrid_password' ## this API key i do in sendgrid website for name:Newspaper
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
-#---------------------------------
-
-
-
-
-
-# DATABASES = {
-#    'default': dj_database_url.parse(env('DATABASE_URL'), conn_max_age=600, conn_health_checks=True)
-# }
