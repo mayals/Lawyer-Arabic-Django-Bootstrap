@@ -3,8 +3,9 @@
 <section id="messages">
     <div class="container">
         {% if messages %} {% for message in messages %}
+        <br><br><br><br><br><br>
         <div class='alert alert-{{message.tags}}'>
-            <strong>{{ message }}</strong>
+            <strong class="text-center">{{ message }}</strong>
         </div> {% endfor %} {% endif %}
     </div>
 </section>
@@ -45,7 +46,7 @@
     <div class="container">
         {% if cat_post_detail.post_author == user %}
         <div>
-            <a class="btn btn-sm btn-danger mr-1  float-right" href="{% url 'blog_app:post_delete' cat_selected.id  cat_post_detail.id  %}"><i class="far fa-trash-alt"></i></a>
+            <a class="btn btn-sm btn-danger mr-1  float-right" href="{% url 'blog_app:post_delete_confirm' cat_selected.id  cat_post_detail.id  %}"><i class="far fa-trash-alt"></i></a>
             <a class="btn btn-sm btn-success  mr-1 float-right" href="{% url 'blog_app:post_update' cat_selected.id  cat_post_detail.id  %}"><i class="far fa-edit"></i></a>
         </div>
         {% endif %}
@@ -144,7 +145,7 @@
                 <p class="card-text ">لم يتم إضافة تعليق لهذ الموضوع بعد .</p>
                 <span class="ml-auto ">
                      كن أول من يضع تعليق لهذا الموضوع من  
-                         <a href="{% url 'blog_app:post_add' cat_selected.id %} ">
+                         <a href="#">
                                هنا 
                          </a>
                     </span>

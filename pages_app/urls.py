@@ -5,6 +5,7 @@ app_name = 'pages_app'
 urlpatterns = [
     path('',views.index, name ='index'),
     path('about/', views.about, name='about'),
+    path('commerical/', views.commerical, name='commerical'),
     path('gallery/', views.gallery, name='gallery'),
     path('service/', views.service, name='service'),
     path('contact/', views.contactus, name='contactus'),

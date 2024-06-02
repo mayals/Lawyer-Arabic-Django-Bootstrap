@@ -4,8 +4,9 @@
 
     <!--messges -->
     {% if messages %} {% for message in messages %}
+    <br><br><br><br><br><br>
     <div class='alert alert-{{message.tags}}'>
-        <strong>{{ message }}</strong>
+        <strong class= 'text-center'>{{ message }}</strong>
     </div> {% endfor %} {% endif %}
     <!--end messages -->
 
@@ -68,7 +69,7 @@
                             <img width="100%" class="img-fluid" src="{% static 'images/pages_app/service_1.jpg' %}" alt="" />
                         </a>
                         <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading">العقود التجارية</div>
+                            <a  href="{% url 'pages_app:commerical' %}" class="portfolio-caption-heading">العقود التجارية</a>
                             <div class="portfolio-caption-subheading text-muted">صياغة إحترافية للعقود التجارية</div>
                         </div>
                     </div>

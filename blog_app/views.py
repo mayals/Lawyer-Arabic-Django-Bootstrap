@@ -176,6 +176,28 @@ def post_update(request, cat_id, post_id):
 
 
 
+#--- post delete_confirm -----------#
+@login_required(login_url='account_app:login')
+
+def post_delete_confirm(request, cat_id, post_id):
+    cat_selected = get_object_or_404(Category, id=cat_id)
+    posts_cat = Post.objects.all().filter(cat_fk=cat_id)
+    cat_post_detail = get_object_or_404(Post, cat_fk=cat_id, id=post_id, post_status='published')
+    print(cat_post_detail)
+    if request.method =='POST':
+        print('POST')
+        cat_post_detail.delete()
+        
+        messages.success(request, f'شكراً ( {request.user.username} ), تم حذف موضوعك ')
+        return redirect('blog_app:posts_to_cat', cat_id=cat_selected.id)
+
+    context ={
+        'cat_selected': cat_selected,
+        'cat_post_detail': cat_post_detail,
+    }
+    return render(request,'blog_app/post_delete_confirm.html',context)
+
+
 
 
 
@@ -188,15 +210,12 @@ def post_delete(request, cat_id, post_id):
     cat_selected = get_object_or_404(Category, id=cat_id)
     posts_cat = Post.objects.all().filter(cat_fk=cat_id)
     cat_post_detail = get_object_or_404(Post, cat_fk=cat_id, id=post_id, post_status='published')
+    print(cat_post_detail)
     
-    if request.method =='POST':
-        cat_post_detail.delete()
-        messages.success(request, f'شكراً ( {request.user.username} ), تم حذف موضوعك ')
-        return redirect('blog_app:posts_to_cat', cat_id=cat_selected.id)
+    cat_post_detail.delete()
+    
+    messages.success(request, f'شكراً ( {request.user.username} ), تم حذف موضوعك ')
+    return redirect('blog_app:posts_to_cat', cat_id=cat_selected.id)
 
-    context ={
-        'cat_selected': cat_selected,
-        'cat_post_detail': cat_post_detail,
-    }
-    return render(request,'blog_app/post_delete.html',context)
+    
 
